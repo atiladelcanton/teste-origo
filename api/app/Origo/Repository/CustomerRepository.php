@@ -9,6 +9,8 @@
     use App\Origo\Contracts\Repository\GetAllInterface;
     use App\Origo\Contracts\Repository\GetByIdInterface;
     use App\Origo\Contracts\Repository\UpdateInterface;
+    use Exception;
+    use Illuminate\Contracts\Container\BindingResolutionException;
     use Illuminate\Database\Eloquent\Collection;
     use Illuminate\Database\Eloquent\Model;
     use Illuminate\Pagination\LengthAwarePaginator;
@@ -41,14 +43,18 @@
         }
 
 
-
         /**
          * @param int $id
          * @return Model
          */
         public function getById(int $id): Model
         {
-            return $this->model->find($id);
+            $customer = $this->model->with('plans')->find($id);
+            if (is_null($customer)) {
+                throw new Exception("Customer not found", 404);
+            }
+
+            return $customer;
         }
 
         /**
@@ -66,10 +72,13 @@
          * @param string $orientation
          * @param int $itensPerPage
          * @return mixed
-         * @throws \Illuminate\Contracts\Container\BindingResolutionException
+         * @throws BindingResolutionException
          */
-        public function getAll(string $orderColum = 'id', string $orientation = 'desc',int $itensPerPage=15): LengthAwarePaginator
-        {
+        public function getAll(
+            string $orderColum = 'id',
+            string $orientation = 'desc',
+            int $itensPerPage = 15
+        ): LengthAwarePaginator {
             return $this->model->orderBy($orderColum, $orientation)->paginate($itensPerPage);
         }
     }
