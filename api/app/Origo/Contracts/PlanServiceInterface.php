@@ -1,13 +1,12 @@
 <?php
 
 
-    namespace App\Origo\Contracts;
+namespace App\Origo\Contracts;
 
 
-    use App\Origo\Contracts\Service\RenderEditInterface;
-    use App\Origo\Contracts\Service\RenderListInterface;
+use App\Origo\Contracts\Service\RenderEditInterface;
+use App\Origo\Contracts\Service\RenderListInterface;
 
-    interface PlanServiceInterface extends RenderListInterface, RenderEditInterface
-    {
-
-    }
+interface PlanServiceInterface extends RenderListInterface, RenderEditInterface
+{
+}

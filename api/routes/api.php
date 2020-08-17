@@ -1,9 +1,9 @@
 <?php
 
-    use Illuminate\Http\Request;
-    use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
-    /*
+/*
     |--------------------------------------------------------------------------
     | API Routes
     |--------------------------------------------------------------------------
@@ -14,6 +14,7 @@
     |
     */
 
-    Route::group(['middleware' => ['auth:api']], function () {
-        Route::resource('customers','Api\CustomerController');
-    });
+Route::group(['middleware' => ['auth:api']], function () {
+    Route::resource('customers', 'Api\CustomerController');
+    Route::resource('plans', 'Api\PlanController');
+});

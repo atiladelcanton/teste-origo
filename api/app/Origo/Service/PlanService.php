@@ -9,7 +9,6 @@ namespace App\Origo\Service;
 use App\Origo\Contracts\PlanServiceInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class PlanService implements PlanServiceInterface
 {
@@ -34,7 +33,7 @@ class PlanService implements PlanServiceInterface
      * @param string $orderColum
      * @return Collection
      */
-    public function renderList(string $column = 'id', $orderColum = 'DESC'): LengthAwarePaginator
+    public function renderList(string $column = 'id', $orderColum = 'DESC'): Collection
     {
         return $this->repository->getAll($column, $orderColum);
     }

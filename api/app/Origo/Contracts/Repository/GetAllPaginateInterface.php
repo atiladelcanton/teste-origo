@@ -5,9 +5,9 @@ namespace App\Origo\Contracts\Repository;
 
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
-
-interface GetAllInterface
+interface GetAllPaginateInterface
 {
     /**
      * @param string $orderColum
@@ -15,5 +15,5 @@ interface GetAllInterface
      * @param int $itensPerPage
      * @return mixed
      */
-    public function getAll(string $orderColum = 'id', string $orientation = 'desc'): Collection;
+    public function getAll(string $orderColum = 'id', string $orientation = 'desc', int $itensPerPage = 15): LengthAwarePaginator;
 }
