@@ -4,16 +4,17 @@
 namespace App\Origo\Repository;
 
 
+use Exception;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Origo\Contracts\Repository\CreateInterface;
 use App\Origo\Contracts\Repository\DeleteInterface;
-use App\Origo\Contracts\Repository\GetAllPaginateInterface;
-use App\Origo\Contracts\Repository\GetByIdInterface;
 use App\Origo\Contracts\Repository\UpdateInterface;
-use Exception;
+use App\Origo\Contracts\Repository\GetByIdInterface;
+use App\Origo\Contracts\Repository\GetAllPaginateInterface;
 use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Pagination\LengthAwarePaginator;
+
 
 class CustomerRepository implements
     GetAllPaginateInterface,

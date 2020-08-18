@@ -26,6 +26,15 @@ class CustomerService implements CustomerServiceInterface
      */
     public function buildDelete(int $id): void
     {
+        $customer = $this->renderEdit($id);
+
+        foreach ($customer->plans as $plan) {
+
+            if ($plan->id === 1 && $customer->state === 'São Paulo') {
+                throw new Exception("Clientes do estado de São Paulo com plano Free, não podem ser excluídos", 500);
+            }
+        }
+
         $this->repository->delete($id);
     }
 
@@ -53,6 +62,7 @@ class CustomerService implements CustomerServiceInterface
         $return =  $this->repository->update($id, $data);
         if (isset($data['plans'])) {
             $customer = $this->renderEdit($id);
+
             $customer->plans()->sync(explode(',', $data['plans']));
         }
 
